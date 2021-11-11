@@ -19,11 +19,11 @@
 // NBIN is the number of bins we'll sort the radii into. Must be at least N-1 for the N-point function
 // We output only NPCF with bin1 < bin2 < bin3 etc. to avoid degeneracy and the bins including zero separations
 // IF NBIN is changed IT MUST ALSO BE UPDATED IN modules/gpufuncs.h!
-#define NBIN 20
+#define NBIN 30
 
 // ORDER is the order of the Ylm we'll compute.
 // This must be <=MAXORDER, currently hard coded to 10 for 3PCF/4PCF, or 5 for 5PCF, or 3 for 6PCF.
-#define ORDER 5
+#define ORDER 0
 
 // MAXTHREAD is the maximum number of allowed threads.
 // Big trouble if actual number exceeds this!
@@ -243,7 +243,7 @@ void usage() {
     fprintf(stderr, "   -outstr <outstring>: String to prepend to the output file.  Default sample.\n");
     fprintf(stderr, "   -def: This allows one to accept the defaults without giving other entries.\n");
     fprintf(stderr, "   -rmin <rmin>: The minimum radius of the smallest pair bin.  Default 0.\n");
-    fprintf(stderr, "   -rmax <rmax>: The maximum radius of the largest pair bin.  Default 200.\n");
+    fprintf(stderr, "   -rmax <rmax>: The maximum radius of the largest pair bin.  Default 30.\n");
     fprintf(stderr, "\n");
     fprintf(stderr, "   -ran <np>: Ignore any file and use np random perioidic points instead.\n");
     fprintf(stderr, "   -box <boxsize> : The periodic size of the computational domain, if particles are thrown randomly.  Default 400.\n");
@@ -281,7 +281,7 @@ int main(int argc, char *argv[]) {
         // The periodicity of the position-space cube. (overwritten if reading from file)
     Float rescale = 1.0;   // If left zero or negative, set rescale=boxsize
     	// The particles will be read from the unit cube, but then scaled by boxsize.
-    Float rmax = 200;
+    Float rmax = 30;
     	// The maximum radius of the largest bin.
     Float rmin = 0;
     // The minimum radius of the smallest bin.
