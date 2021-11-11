@@ -32,9 +32,9 @@
 # Main inputs
 set useAVX = 1 # whether we have AVX support
 set periodic = 0 # whether to run with periodic boundary conditions (should also be set in Makefile)
-set connected = 0 # if true, remove the disconnected (Gaussian) 4PCF contributions (need to set -DDISCONNECTED in the Makefile for this)
-set rmin = 20 # minimum radius in Mpc/h
-set rmax = 160 # maximum radius in Mpc/h
+set connected = 1 # if true, remove the disconnected (Gaussian) 4PCF contributions (need to set -DDISCONNECTED in the Makefile for this)
+set rmin = 0 # minimum radius in Mpc/h
+set rmax = 30 # maximum radius in Mpc/h
 
 # Other inputs
 set scale = 1 # rescaling for co-ordinates
@@ -42,15 +42,15 @@ set ngrid = 50 # grid-size for accelerating pair count
 set boxsize = 1000 # only used if periodic=1
 
 # File directories
-set root = boss_cmass # root for data filenames
-set ranroot = boss_cmass # root for random filenames
-set in = /projects/QUIJOTE/Oliver/npcf/data_sgc # input directory (see above for required contents)
-set out = /projects/QUIJOTE/Oliver/npcf/boss_4pcfSall_production # output file directory
-set tmp = /scratch/gpfs/ophilcox/npcf4S_0 # temporary directory for intermediate file storage for this run (ideally somewhere with fast I/O)
+set root = qpm_galaxies # root for data filenames
+set ranroot = qpm_randoms # root for random filenames
+set in = "in" # input directory (see above for required contents)
+set out = "out" # output file directory
+set tmp = "tmp" # temporary directory for intermediate file storage for this run (ideally somewhere with fast I/O)
 
 # Load some python environment with numpy and sympy installed
-module load anaconda3
-conda activate ptenv
+# module load anaconda3
+# conda activate ptenv
 
 ##########################################################
 
@@ -58,10 +58,10 @@ conda activate ptenv
 set RRR_coupling = $out/$ranroot.RRR_coupling.npy
 
 # Set number of threads (no SLURM)
-#set OMP_NUM_THREADS = 4
+set OMP_NUM_THREADS = 4
 
 # Set number of threads (with SLURM)
-setenv OMP_NUM_THREADS $SLURM_NPROCS
+# setenv OMP_NUM_THREADS $SLURM_NPROCS
 
 # Define command to run the C++ code
 if ($useAVX) then
@@ -136,7 +136,8 @@ echo "Done with R^N"
 foreach n ( 00 01 02 03 04 05 06 07 08 09 \
 	    10 11 12 13 14 15 16 17 18 19 \
 	    20 21 22 23 24 25 26 27 28 29 \
-	    30 31 )
+	    30 31 32 33 34 35 36 37 38 39 \
+      40 41 42 43 44 45 46 47 48)
 
     # First copy the randoms and add the data
     /bin/cp -f $tmp/$root.data $tmp/$root.ran.$n
