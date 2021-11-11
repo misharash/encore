@@ -121,7 +121,7 @@ void load_3pcf_coupling(){
 
   // Read in values from file (straightforward as file has no comment strings and one value per line)
   int line_count = 0;
-  while (fgets(line,1000000,fp)!=NULL) threepcf_coupling[line_count++]=atof(line);
+  while (fgets(line,100000,fp)!=NULL) threepcf_coupling[line_count++]=atof(line);
   assert(line_count==NLM_MAX);
 };
 
