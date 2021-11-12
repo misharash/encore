@@ -44,9 +44,10 @@ set boxsize = 1000 # only used if periodic=1
 # File directories
 set root = qpm_galaxies # root for data filenames
 set ranroot = qpm_randoms # root for random filenames
-set in = "in" # input directory (see above for required contents)
-set out = "out" # output file directory
-set tmp = "tmp" # temporary directory for intermediate file storage for this run (ideally somewhere with fast I/O)
+set dir = `pwd`
+set in = "$dir/in" # input directory (see above for required contents)
+set out = "$dir/out" # output file directory
+set tmp = "$dir/tmp" # temporary directory for intermediate file storage for this run (ideally somewhere with fast I/O)
 
 # Load some python environment with numpy and sympy installed
 # module load anaconda3
