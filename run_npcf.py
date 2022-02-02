@@ -181,7 +181,6 @@ if periodic:
 else:
     print("Combining files together and performing edge-corrections")
     # run script, print output to stdout AND append to errlog
-    # The script doesn't exist yet
     os.system(f"python python/combine_files_new.py {os.path.join(tmpdir, outroot)} {len(datafilenames)} {Nparts} {OMP_NUM_THREADS} | tee -a {errlog}")
 
 ### If the connected flag is set, also combine files to estimate the disconnected 4PCF
